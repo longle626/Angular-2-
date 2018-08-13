@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "tech-shop-a6493"
+    "default": "tech-shop-a6493",
+    "tech-shop": "tech-shop-a6493"
   }
 }
