@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="row">
+  <div class="row">	
+  	<!-- add product form -->
     <div class="col-md-6">
       <form #f="ngForm" (ngSubmit)="save(f.value)">
 				<div class="form-group">
@@ -39,7 +40,7 @@
 			</form>
     </div>
     <!-- preview products -->
-    <div class="col-md-6">
+    <div class="col-md-6 preview-products">
       <div class="card" style="width: 20rem;">
 			  <img class="card-img-top" [src]="imageUrl.value" >
 			  <div class="card-body">
