@@ -18,4 +18,9 @@ export class ProductsService {
   getAll(){
   	return this.db.list('/products');
   }
+  
+  //get product id from firebase
+  getProduct(productId){
+    return this.db.object('/products/' + productId);
+  }
 }
