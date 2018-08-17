@@ -18,9 +18,19 @@ export class ProductsService {
   getAll(){
   	return this.db.list('/products');
   }
-  
+
   //get product id from firebase
   getProduct(productId){
     return this.db.object('/products/' + productId);
+  }
+
+  // update product after editing
+  update(productId, product){
+    return this.db.object('/products/' + productId).update(product);
+  }
+
+  //delete a product on firebase
+  delete( productId){
+    return this.db.object('/products/' + productId ).remove();
   }
 }

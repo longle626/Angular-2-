@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , OnDestroy } from '@angular/core';
 import { ProductsService } from './../../products.service';
-
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -8,17 +8,29 @@ import { ProductsService } from './../../products.service';
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit {
+export class AdminProductsComponent implements OnInit, OnDestroy {
 
-	products$;
+	products: {title: string}[];
+  filteredProducts : any[];
+  subscription: Subscription;
 
   constructor( private productService: ProductsService) {
-  	this.products$ = this.productService.getAll();
+    this.subscription = this.productService.getAll().
+    subscribe(p => this.filteredProducts = this.products = p);
 
   }
+  // filtering product 
+  filter(query: string){
+    this.filteredProducts = (query) ?
+      this.products.filter(p => p.title.toLowerCase().
+      includes(query.toLowerCase())) : this.products;
+  }
+  //unsubscribe product
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 
-  ngOnInit() {
-  	
+  ngOnInit() {	
   }
 
 }
