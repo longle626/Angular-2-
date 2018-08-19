@@ -22,7 +22,7 @@ export class AppComponent {
 			//get return URL 
 			let returnUrl = localStorage.getItem('returnUrl');
 			if(!returnUrl) return;
-				//remove return URL in local storage
+				//remove returnURL in local storage
 				localStorage.removeItem('returnUrl');
 				router.navigateByUrl(returnUrl);
 		});

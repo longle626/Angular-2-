@@ -3,7 +3,7 @@ import { ProductsService } from './../../products.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Product } from './../../models/product';
 import { DataTableResource } from 'angular5-data-table';
-import { DataTableModule } from 'angular5-data-table';
+// import { DataTableModule } from 'angular5-data-table';
 
 
 @Component({
