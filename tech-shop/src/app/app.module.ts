@@ -49,7 +49,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     AngularFireAuthModule,
     NgbModule.forRoot(),
     FormsModule,
-    DataTableModule,
+    DataTableModule.forRoot(),
 
     RouterModule.forRoot([
 
