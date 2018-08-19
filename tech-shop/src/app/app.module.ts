@@ -6,8 +6,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { FormsModule } from '@angular/forms';
+import { DataTableModule } from 'angular5-data-table';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -21,7 +21,8 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './auth-guard.service';
-import { AdminAuthGuardService } from './admin-auth-guard.service'
+import { AdminAuthGuardService } from './admin-auth-guard.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component'
 
 
 
@@ -37,7 +38,8 @@ import { AdminAuthGuardService } from './admin-auth-guard.service'
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
 
   ],
   imports: [
@@ -46,6 +48,8 @@ import { AdminAuthGuardService } from './admin-auth-guard.service'
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule.forRoot(),
+    FormsModule,
+    DataTableModule,
 
     RouterModule.forRoot([
 
@@ -60,7 +64,15 @@ import { AdminAuthGuardService } from './admin-auth-guard.service'
     	{ path: 'my/orders', component: MyOrdersComponent, canActivate :[AuthGuardService]},
     	
         //admin route
-    	{ path: 'admin/products',
+        { path: 'admin/products/new',
+          component: ProductFormComponent,
+          canActivate: [AuthGuardService , AdminAuthGuardService]
+        },
+        { path: 'admin/products/:id',
+          component: ProductFormComponent,
+          canActivate: [AuthGuardService , AdminAuthGuardService]
+        },
+        { path: 'admin/products',
           component: AdminProductsComponent,
           canActivate: [AuthGuardService , AdminAuthGuardService]
         },
