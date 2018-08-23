@@ -1,3 +1,14 @@
-<p>
-  products works!
-</p>
+<div class="container row">
+	<!-- Navbar for product type -->
+	<products-filter class="col-md-12" [category]="category"></products-filter>
+	
+	<!-- all products layout with line breaker -->
+  <div class="row">
+  	<ng-container *ngFor="let p of filteredProducts ; let i = index">
+  		<div class="col" >
+				<product-cards [products]="p"></product-cards>
+    	</div>
+    <div *ngIf="(i + 1) % 3 == 0 "class="w-100"></div>	
+		</ng-container>
+	</div>
+</div>
