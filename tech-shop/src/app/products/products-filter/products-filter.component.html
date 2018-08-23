@@ -1,0 +1,19 @@
+<ul class="nav nav-pills nav-justified category-nav"  >
+  <li class="nav-item">
+    <a 
+      class="nav-link"
+      routerLink="/"
+      [class.active]= "!category">
+        All Products
+    </a>
+  </li>
+  <li *ngFor="let c of categories$ | async" class="nav-item">
+    <a
+      [queryParams]="{category: c.$key}"
+      routerLink="/"
+      class="nav-link"
+      [class.active]="category === c.$key">
+        {{c.name}}
+    </a>
+  </li>
+</ul>

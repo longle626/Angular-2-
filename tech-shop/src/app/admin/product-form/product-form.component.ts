@@ -25,7 +25,7 @@ export class ProductFormComponent implements OnInit {
   		this.categories$ = catergoryService.getCategories();
 
   		// get id from the route param then pass to product service to get 
-  		//  the product object according to the id.
+  		// the product object according to the id.
   		this.id = this.route.snapshot.paramMap.get('id');
   		if (this.id) this.productsService.getProduct(this.id).take(1).subscribe(p => this.product = p)
   	}
