@@ -6,6 +6,6 @@
     
   </div>
   <div class="card-footer">
-  	<a *ngIf="showActions" href="#" class="btn btn-primary btn-block"> Add to Cart </a>
+  	<button (click)="addToCart(products)" *ngIf="showActions" class="btn btn-primary btn-block"> Add to Cart </button>
   </div>
 </div>
