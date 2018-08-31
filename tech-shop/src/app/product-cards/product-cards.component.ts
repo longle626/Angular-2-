@@ -19,11 +19,7 @@ export class ProductCardsComponent implements OnInit {
   }
 
   addToCart(products: Product){
-  	
-  	this.cartService.addToCart();
-
-
-
-  	
+  	// call addToCart func in shopping cart-service
+  	this.cartService.addToCart(products);	
   }
 }

@@ -11,7 +11,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class ProductsComponent implements OnInit {
 
-	products: Product[] = [];
+	products: any;
 	filteredProducts: Product[] = [];
 	category: string;
 	
@@ -23,7 +23,7 @@ export class ProductsComponent implements OnInit {
 	  	productsService
 	  	.getAll()
 	  	.switchMap( p => { 
-	  		this.products = p  ;
+	  		this.products = p;
 	  		return route.queryParamMap;
 	  	})
 	  	// get the category from route param
