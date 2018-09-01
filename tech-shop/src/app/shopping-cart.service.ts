@@ -17,11 +17,12 @@ export class ShoppingCartService {
   	})
   }
   // get Cart object from firebase 
-  private getCart(cartId){
+  async getCart(){
+  	let cartId = await this.getOrCreateCartId();
   	return this.db.object('/shopping-carts/' + cartId);
-  }
+  } 
   
-  private async getOrCreateCartId(){
+  private async getOrCreateCartId() : Promise<string>{
   	// get cartId from local storage
   	let cartId = localStorage.getItem('cartId');
   	
@@ -37,18 +38,19 @@ export class ShoppingCartService {
 		// return the cart key
 		return result.key;  		
   }
+  // return shopping cart item
+  private getItem (cartId : string , productsId: string){
+  	return this.db.object('/shopping-carts/' + cartId + '/items/' + productsId);
+  }
 
   // add item to shopping cart
   async addToCart(products: Product){
   	//get cartID
   	let cartId = await this.getOrCreateCartId();
   	//add items to shopping-cart/firebase db
-  	let item$ = this.db.object('/shopping-carts/' + cartId + '/items/' + products.$key);
+  	let item$ = this.getItem(cartId , products.$key);
   	item$.take(1).subscribe(item => {
-  		if(item.$exists()) item$.update({
-  			quantity: item.quantity + 1
-  		});
-  		else item$.set({products : products , quantity : 1 })
-  	})
+  		item$.update({products : products ,quantity: (item.quantity || 0) + 1});		
+  	});
   } 
 }
