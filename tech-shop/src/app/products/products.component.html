@@ -1,7 +1,6 @@
 <div class="container row">
 	<!-- Navbar for product type -->
 	<products-filter class="col-md-12" [category]="category"></products-filter>
-	
 	<!-- all products layout with line breaker -->
   <div class="row">
   	<ng-container *ngFor="let p of filteredProducts ; let i = index">

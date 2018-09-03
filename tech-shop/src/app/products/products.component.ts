@@ -48,7 +48,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   	this.sub = (await this.shoppingCartService.getCart())
   		.subscribe(cart => this.cart = cart);
   }
-
+  
   ngOnDestroy(){
   	// unsubscribe cart observable when it destroy
   	this.sub.unsubscribe();
