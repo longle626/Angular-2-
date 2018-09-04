@@ -47,12 +47,10 @@ export class ShoppingCartService {
   private getItem (cartId : string , productsId: string){
   	return this.db.object('/shopping-carts/' + cartId + '/items/' + productsId);
   }
-
   // add item to shopping cart
   addToCart(products: Product){
   	this.updateQuantity(products , 1)
   } 
-
   // remove item from shopping cart
   removeFromCart(products:Product){
   	this.updateQuantity( products,-1)
