@@ -49,20 +49,36 @@ export class ShoppingCartService {
   }
   // add item to shopping cart
   addToCart(products: Product){
-  	this.updateQuantity(products , 1)
+  	this.updateItems(products , 1)
   } 
   // remove item from shopping cart
   removeFromCart(products:Product){
-  	this.updateQuantity( products,-1)
+  	this.updateItems( products,-1)
   }
   // update quantity based on add/remove action in shopping cart
-  private async updateQuantity(products: Product ,  quantity: number){
+  private async updateItems(products: Product ,  quantity: number){
   	// get cartID
   	let cartId = await this.getOrCreateCartId();
   	// update item quantity to shopping-cart/firebase db
   	let item$ = this.getItem(cartId , products.$key);
   	item$.take(1).subscribe(item => {
-  		item$.update({products : products ,quantity: (item.quantity || 0) + quantity });		
+      let quantities = (item.quantity || 0) + quantity;
+      // if quantity = 0 then remove from shopping cart
+      if (quantities === 0) {
+        item$.remove();
+      } else {
+        item$.update({
+        title: products.title,
+        imageUrl: products.imageUrl,
+        price: products.price,
+        quantity: quantities 
+        });    
+      }		
   	});
+  }
+  // clear all items in the shopping-cart
+  async clearCart(){
+    let cartId = await this.getOrCreateCartId();
+    this.db.object('/shopping-carts/'+ cartId + '/items/').remove();
   }
 }

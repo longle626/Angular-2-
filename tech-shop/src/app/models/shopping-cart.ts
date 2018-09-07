@@ -7,9 +7,12 @@ export class ShoppingCart {
 
 	constructor( public itemsMap : {[productsId : string] : ShoppingCartItems}){
 		//iterate through shopping cart's items then push to the items array
+		this.itemsMap = itemsMap || {};
 		for ( let productsId in itemsMap) {
-			let item = itemsMap[productsId];
-			this.items.push( new ShoppingCartItems (item.products , item.quantity));	
+			let item = itemsMap[productsId];		
+			this.items.push(new ShoppingCartItems({
+				...item, $key: productsId
+			}));	
 		}
 	}
 	// calculate total item in shopping cart
