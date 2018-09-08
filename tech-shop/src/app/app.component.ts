@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-import { UserService } from './user.service'
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -13,18 +13,22 @@ export class AppComponent {
   
   title = 'tech-shop';
 
-	constructor(private userService: UserService, private auth: AuthService, router : Router){	
+	constructor(
+		private userService: UserService,
+		private auth: AuthService, 
+	 	router : Router){	
 		
-		//redirect user after log in
+		// redirect user after log in
 		auth.user$.subscribe( user => {
 			if(!user) return;
 			userService.save(user);
-			//get return URL 
+			// get return URL 
 			let returnUrl = localStorage.getItem('returnUrl');
 			if(!returnUrl) return;
-				//remove returnURL in local storage
-				localStorage.removeItem('returnUrl');
-				router.navigateByUrl(returnUrl);
+			// Remove returnURL in local storage
+			localStorage.removeItem('returnUrl');
+			// Navigate back to the last page
+			router.navigateByUrl(returnUrl);
 		});
   }
 }

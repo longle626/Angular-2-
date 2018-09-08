@@ -1,30 +1,41 @@
 <h1>Shopping Cart </h1>
-<ng-container *ngIf=" cart$ | async as cart"> 
+<div class="row col-10 d-flex" *ngIf=" cart$ | async as cart"> 
 	<p> You have {{cart.totalItems}} item in your shopping cart.</p>
 	<table class="table">
 		<thead>
 			<tr>
+				<th></th>
 				<th> Product</th>
-				<th> Quantity</th>
-				<th> Price</th>
+				<th class="quantity text-center"> Quantity</th>
+				<th class="price text-right"> Price</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr *ngFor="let item of cart.items">
+				<td> <img class="thumbNail" src="{{item.imageUrl}}"> </td>
 				<td> {{ item.title }}</td>
 				<td> 
-					<products-quantity [products] = "item" [shopping-cart-item]="cart"></products-quantity>	
+					<products-quantity [products]= "item" [shopping-cart-item]="cart"></products-quantity>	
 				</td>
-				<td> {{ item.totalPrice | currency:'USD':'symbol'}}</td>
+				<td class="text-right"> {{ item.totalPrice | currency:'USD':'symbol'}}</td>
 			</tr>						
 		</tbody>
 		<tfoot>
 			<tr>
 				<th></th>
+				<th></th>
 				<th> Total Price :</th>
-				<th> {{ cart.sumTotalPrice | currency:'USD':'symbol'}} </th>
+				<th class="text-right"> {{ cart.sumTotalPrice | currency:'USD':'symbol'}} </th>
 			</tr>			
 		</tfoot>	
 	</table>
-	<button (click)="clearCart()" class="btn btn-danger btn-sm"> Clear Cart</button>
-</ng-container>
+	<button 
+		*ngIf="cart.items.length" 
+		(click)="clearCart()" 
+		class="p-2 btn btn-light btn-sm"> Clear Cart
+	</button>	
+	<a 
+		*ngIf="cart.items.length"
+		routerLink="/check-out"
+		class="ml-auto p-2 btn btn-primary btn-md"> Check Out</a>
+</div>

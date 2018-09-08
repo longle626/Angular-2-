@@ -24,23 +24,23 @@ export class AuthService {
   }
 
 	login(){
-		//set return url and save in local storage
+		// Set return url and save in local storage
 		let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-		localStorage.setItem('returnUrl ', returnUrl);
+		localStorage.setItem('returnUrl', returnUrl);
 
-		//send to google for authenticate
+		// Send to google for authenticate
 		this.afAuth.auth.signInWithRedirect( new firebase.auth.GoogleAuthProvider());
 	}
 
 	logout() {
   	this.afAuth.auth.signOut();
   }
-  //get app user object 
+  // Get app user object 
   get appUser$() : Observable<AppUser> {
   	return this.user$
   		.switchMap(user => {
   			if (user ) return this.userService.get(user.uid);
-  			// return observable emit null value 
+  			// Return observable emit null value 
   			return Observable.of(null);
   		});
   }
