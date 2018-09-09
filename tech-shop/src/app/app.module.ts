@@ -30,6 +30,7 @@ import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { ProductsFilterComponent } from './products/products-filter/products-filter.component';
 import { ProductCardsComponent } from './product-cards/product-cards.component';
 import { ProductsQuantityComponent } from './products-quantity/products-quantity.component';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ProductsQuantityComponent } from './products-quantity/products-quantity
     ProductFormComponent,
     ProductsFilterComponent,
     ProductCardsComponent,
-    ProductsQuantityComponent
+    ProductsQuantityComponent,
+    ShoppingCartSummaryComponent
 
   ],
   imports: [
