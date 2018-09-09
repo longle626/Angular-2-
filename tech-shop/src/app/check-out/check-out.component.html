@@ -1,3 +1,39 @@
-<p>
-  check-out works!
-</p>
+<div class="container">
+  <div class="row">	
+  	<!-- add product form -->
+    <div class="col-md-6">
+      <form #f="ngForm">
+				<div class="form-group">
+					<label for="fullName"> Full Name: </label>
+					<input #fullName="ngModel" [(ngModel)]="shipping.fullName" id="fullName" type="text" class="form-control" name="fullName" required>
+					<div *ngIf="fullName.touched && fullName.invalid" class="alert alert-danger">
+						 Full Name is required.
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="shippingAddress"> Shipping Address: </label>
+					<input #shippingAddress="ngModel" [(ngModel)]="shipping.shippingAddress" id="shippingAddress" type="text" class="form-control" name="shippingAddress" required>
+					<div *ngIf="shippingAddress.touched && shippingAddress.invalid" class="alert alert-danger">
+						 Shipping Address is required.
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="city"> City: </label>
+					<input #city="ngModel" [(ngModel)]="shipping.city" id="city" type="text" class="form-control" name="city" required>
+					<div *ngIf="city.touched && city.invalid" class="alert alert-danger">
+						 City is required.
+					</div>
+				</div>				
+				<button 
+					[disabled]="f.invalid"
+					(click)="placeOrder()" 
+					class="btn btn-primary"> Place Order </button>
+			</form>
+    </div>
+    <!-- preview products -->
+    <div class="col-md-6 preview-products">
+   		<p> preview </p>
+			
+    </div>
+  </div>
+</div>
