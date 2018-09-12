@@ -45,6 +45,5 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   	let order =  new Order(this.userId, this.shipping, this.cart );
   	let result = await this.orderService.storeOrder(order);
   	this.router.navigate(['order-success', result.key ]);
-
   }
 }

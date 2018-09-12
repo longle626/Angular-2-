@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from './../../order.service';
+import { DataTableResource } from 'angular5-data-table';
+
 
 @Component({
   selector: 'app-admin-orders',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminOrdersComponent implements OnInit {
 
-  constructor() { }
+	order$;
 
-  ngOnInit() {
+  constructor( private orderService: OrderService ) {
+  	this.order$ = orderService.getOrder();
   }
 
+  ngOnInit() {
+  	
+  }
 }

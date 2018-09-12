@@ -80,6 +80,10 @@ import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-c
     	{ path: 'my/orders', 
         component: MyOrdersComponent, 
         canActivate :[AuthGuardService]},
+      { path: 'my/orders/:id',
+        component: MyOrdersComponent,
+        canActivate: [AuthGuardService , AdminAuthGuardService]
+      },
     	
       //admin routes
       { path: 'admin/products/new',

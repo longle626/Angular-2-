@@ -19,4 +19,17 @@ export class OrderService {
   	this.shoppingCartService.clearCart();
   	return orders;
   }
+  // Get all the order data from firebase
+  getOrder(){
+  	return this.db.list('/order' );
+  }
+  // Get order by userID
+  getMyOrder(userId: string){
+  	return this.db.list('/order',{
+  		query: {
+  			orderByChild: 'userId',
+  			equalTo: userId
+  		}
+  	})
+  }
 }
