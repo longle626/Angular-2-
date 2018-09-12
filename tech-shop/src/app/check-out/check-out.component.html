@@ -1,3 +1,39 @@
-<p>
-  check-out works!
-</p>
+<div class="container">
+  <h1>Shipping Information</h1>
+  <div class="row">	
+  	<!-- Check out form -->
+    <div class="col-6">
+      <form #f="ngForm">
+				<div class="form-group">
+					<label for="fullName"> Full Name: </label>
+					<input #fullName="ngModel" [(ngModel)]="shipping.fullName" id="fullName" type="text" class="form-control" name="fullName" required>
+					<div *ngIf="fullName.touched && fullName.invalid" class="alert alert-danger">
+						 Full Name is required.
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="shippingAddress"> Shipping Address: </label>
+					<input #shippingAddress="ngModel" [(ngModel)]="shipping.shippingAddress" id="shippingAddress" type="text" class="form-control" name="shippingAddress" required>
+					<div *ngIf="shippingAddress.touched && shippingAddress.invalid" class="alert alert-danger">
+						 Shipping Address is required.
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="city"> City: </label>
+					<input #city="ngModel" [(ngModel)]="shipping.city" id="city" type="text" class="form-control" name="city" required>
+					<div *ngIf="city.touched && city.invalid" class="alert alert-danger">
+						 City is required.
+					</div>
+				</div>				
+				<button 
+					[disabled]="f.invalid"
+					(click)="placeOrder()" 
+					class="btn btn-primary"> Place Order </button>
+			</form>
+    </div>
+    <!-- Order Summary -->
+    <div class="col-6 ">
+			<shopping-cart-summary [cart] ="cart"> </shopping-cart-summary>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,26 @@
-<p>
-  my-orders works!
-</p>
+<div *ngIf=" myOrder$ | async as order">
+	<h4> All your order</h4>
+	<data-table 
+		[items]="order"
+		[itemCount]="order.length"
+		>
+		<data-table-column
+		 	[property]="'title'"
+			[header]="'Order Date'"
+			[resizable]="true"
+			[sortable]="true">
+				<ng-template #dataTableCell let-item="item">
+				{{ item.datePlaced| date }}
+				</ng-template>
+		</data-table-column>
+		<data-table-column 
+			[property]="'$key'"
+			[header]="'View Order Detail'">
+				<ng-template #dataTableCell let-item="item">
+					<a [routerLink]="['/my/orders/',item.$key]"> View Order </a>
+				</ng-template>
+		</data-table-column>
+	</data-table>
+</div>
+
+

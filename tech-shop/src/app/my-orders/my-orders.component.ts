@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from './../order.service';
+import { AuthService } from './../auth.service';
+import { DataTableResource } from 'angular5-data-table';
+
 
 @Component({
   selector: 'app-my-orders',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyOrdersComponent implements OnInit {
 
-  constructor() { }
+	myOrder$;
 
+  constructor(
+  	private orderService : OrderService,
+  	private authService: AuthService ) {
+  		this.myOrder$ = authService.user$.
+  		switchMap( user => orderService.getMyOrder(user.uid)
+  		)
+  	}
   ngOnInit() {
   }
-
 }

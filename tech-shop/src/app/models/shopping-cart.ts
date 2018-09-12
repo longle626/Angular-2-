@@ -6,7 +6,7 @@ export class ShoppingCart {
 	items : ShoppingCartItems[] = [];
 
 	constructor( public itemsMap : {[productsId : string] : ShoppingCartItems}){
-		//iterate through shopping cart's items then push to the items array
+		// Iterate through shopping cart's items then push to the items array
 		this.itemsMap = itemsMap || {};
 		for ( let productsId in itemsMap) {
 			let item = itemsMap[productsId];		
@@ -15,7 +15,7 @@ export class ShoppingCart {
 			}));	
 		}
 	}
-	// calculate total item in shopping cart
+	// Calculate total item in shopping cart
 	get totalItems (){
 		let count = 0;
     for (let productId in this.itemsMap)
@@ -23,19 +23,18 @@ export class ShoppingCart {
     return count;
 	}
 
-	// get sum of total price
+	// Get sum of total price
 	get sumTotalPrice (){
 		let sum = 0;
 		for (let productsId in this.items){
-				sum = this.items[productsId].totalPrice + sum;
+			sum += this.items[productsId].totalPrice;
 		}
 		return sum;
 	}
 
 	getQuantity(products: Product){
-  	// get quantity from cart object that pass by product.component 	
+  	// Get quantity from cart object that pass by product.component 	
   	let item = this.itemsMap[products.$key];
   	return item ? item.quantity : 0;
-  	
   }
 }
